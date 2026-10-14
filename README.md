@@ -34,13 +34,34 @@ WhatsApp, private calendar availability, AI-assisted matching, and cross-chapter
 - Prefer one small application and a relational database over a multi-agent or microservice platform.
 - Measure useful connections and volunteer time saved, not message volume or data collected.
 
+## Run the offline foundation
+
+Requires Python 3.11+ with system timezone data. The domain code uses only the standard library. No API keys, dependency installation, database, or network access are needed. Run from the repository root:
+
+```sh
+python -m unittest discover -s tests -v
+python -m mycelium
+```
+
+The demonstration uses synthetic people and dates. It prints an introduction dispatch plan and a single-event calendar export. It sends no messages and writes no files. An `.ics` export is not a live calendar subscription.
+
 ## Scope and status
 
-This repository starts with the motivation and pilot boundaries. Architecture documentation and an executable, offline domain foundation are the next increments. There is no deployed service, live messaging integration, calendar connection, or production data processing in this initial commit.
+Implemented: immutable introduction transitions, both-side approvals bound to a proposal digest, expiry and changed-permission checks, approved event exports, reminder planning, a synthetic demonstration, and unit tests.
+
+Not implemented: authentication, persistent consent evidence, PostgreSQL storage, RSVP service, Telegram/WhatsApp integrations, a delivery worker, calendar OAuth, AI matching, UI, or deployment. The Python objects are trusted-input domain models, not an authorization API. A dispatch plan is not a sent message or a durable outbox record.
 
 The project is inspired by contextual, mutually approved introductions, including Boardy's publicly described product workflow. It is not affiliated with Boardy and does not reproduce or claim knowledge of Boardy's internal architecture.
 
 **Non-goals:** scraping chat histories or contact lists, autonomous outreach, advertising profiles, automated hiring decisions, mandatory calendar access, or replacing existing community channels.
+
+## Design documents
+
+- [Motivation and product hypotheses](docs/motivation.md)
+- [Architecture and trust boundaries](docs/architecture.md)
+- [Privacy and safety requirements](docs/privacy-and-safety.md)
+- [Roadmap and acceptance gates](docs/roadmap.md)
+- [Primary sources and verification limits](docs/sources.md)
 
 ## Name and governance
 
